@@ -99,7 +99,7 @@ export default class SortableList extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {data, order} = this.state;
-    let {data: nextData, order: nextOrder} = nextProps;
+    let { data: nextData, order: nextOrder } = nextProps;
 
     if (data && nextData && !shallowEqual(data, nextData)) {
       nextOrder = nextOrder || Object.keys(nextData)
@@ -110,6 +110,17 @@ export default class SortableList extends Component {
           this._resolveRowLayout[key] = resolve;
         });
       });
+      // this.setState({
+      //   animated: false,
+      //   data: nextData,
+      //   containerLayout: null,
+      //   rowsLayouts: null,
+      //   order: nextOrder
+      // });
+
+
+
+    if (nextData.length > data.length) {
       this.setState({
         animated: false,
         data: nextData,
@@ -117,6 +128,15 @@ export default class SortableList extends Component {
         rowsLayouts: null,
         order: nextOrder
       });
+    } else {
+      this.setState({
+        // animated: false,
+        data: nextData,
+        // containerLayout: null,
+        // rowsLayouts: null,
+        order: nextOrder
+      });
+    }
 
     } else if (order && nextOrder && !shallowEqual(order, nextOrder)) {
       this.setState({order: nextOrder});
